@@ -25,7 +25,7 @@ Szótérkép: a vitatott dolgokhoz írd fel, melyik tábor milyen szót használ
 
 Állításnapló: állításonként egy sor: az állítás, a státusza (igaz / részben igaz / hamis / ellenőrizetlen / vélemény / jóslat), a forrása és az információ dátuma. Az ellenőrzés közben a „még nem találtam” ideiglenes köztes állapot; a „jóváhagyatlan” az egész naplót jelöli, nem egy sort. A beszélgetés során frissítsd. A végleges szöveg ebből épül, így semmi nem vész el, és semmi téves nem kerül vissza.
 
-Ha elérhetők artifactok, tedd közzé a `skills/valts/ledger.html` fájlt „Claim ledger” oldalként `capabilities: {"db": {}}` beállítással. Soronként egy állítás legyen a `claims` gyűjteményben (mezők: claim, status, source, date, created). Sorokat frissíts, ne írd újra az oldalt.
+Ha elérhetők artifactok, tedd közzé a `skills/valts/ledger.html` fájlt „Claim ledger” oldalként `capabilities: {"db": {}}` beállítással. Soronként egy állítás legyen a `claims` gyűjteményben (mezők: claim, status, side, source, date, created). A `side` a forrás oldalát jelöli: A tábor, B tábor, vegyes/hivatalos vagy egyoldalú. A „nem jóváhagyott” jelölés a `meta` gyűjtemény `ledger` dokumentumában van. Sorokat frissíts, ne írd újra az oldalt.
 
 ### 3. Ellenőrzés
 
