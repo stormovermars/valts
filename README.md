@@ -20,6 +20,7 @@ Parancs: `/valts` és utána a szöveg.
 ## Felépítés
 
 - `skills/valts/SKILL.md` – a skill (elvek, menet, manipulációs technikák).
+- `skills/valts/ledger.html` – állításnapló oldal (artifactként közzétéve; `db` capability kell).
 - `AGENTS.md` – ugyanez az AGENTS.md-t olvasó eszközöknek. Tartsd szinkronban a SKILL.md-vel.
 - `skills/valts/tests/` – regressziós esetek elvárt eredménnyel.
 - `CHANGELOG.md` – változásnapló.
