@@ -20,7 +20,7 @@ Szótérkép: a vitatott dolgokhoz írd fel, melyik tábor milyen szót használ
 
 Állításnapló: állításonként egy sor: az állítás, a státusza (igaz / részben igaz / hamis / ellenőrizetlen / vélemény / jóslat), a forrása és az információ dátuma. Az ellenőrzés közben a „még nem találtam” ideiglenes köztes állapot; a „jóváhagyatlan” az egész naplót jelöli, nem egy sort. A beszélgetés során frissítsd. A végleges szöveg ebből épül, így semmi nem vész el, és semmi téves nem kerül vissza.
 
-Ha elérhetők artifactok, tedd közzé a `skills/valts/ledger.html` fájlt „Claim ledger” oldalként `capabilities: {"db": {}}` beállítással. Soronként egy állítás legyen a `claims` gyűjteményben (mezők: claim, status, source, date, created). Sorokat frissíts, ne írd újra az oldalt.
+Ha elérhetők artifactok, tedd közzé a `skills/valts/ledger.html` fájlt „Claim ledger” oldalként `capabilities: {"db": {}}` beállítással. Soronként egy állítás legyen a `claims` gyűjteményben (mezők: claim, status, side, source, date, created). A `side` a forrás oldalát jelöli: A tábor, B tábor, vegyes/hivatalos vagy egyoldalú. A „nem jóváhagyott” jelölés a `meta` gyűjtemény `ledger` dokumentumában van. Sorokat frissíts, ne írd újra az oldalt.
 
 ### 3. Ellenőrzés
 
@@ -44,7 +44,7 @@ Ha elérhetők artifactok, tedd közzé a `skills/valts/ledger.html` fájlt „C
 
 ### 5. Átírás
 
-1. A szerző hangja marad: a sorrend, a témák, a következtetés és a nyelv. Ne hozz be új keretet, címeket vagy témát.
+1. A szerző hangja marad: a sorrend, a témák, a következtetés és a nyelv. Ne hozz be új keretet, címeket vagy témát. A szöveg eredeti részeiből a lehető legkevesebbet változtasd meg: tartsd meg a mondatait és szavait, ahol nem sérül elv vagy ellenőrzött tény, és csak azt írd át, amit az elvek, a napló vagy az 5.2–5.8 pont megkövetel.
 2. Ne adj a szerző szájába mondatot. Ne írj olyat, amit nem gondol. A saját állítása az övé marad, véleményként jelölve („szerintem…”), és soha nem tulajdonítod másnak.
 3. Pontosíts, ne törölj: a részben igaz állítást a pontos változatára javítsd, ne hagyd ki. A hamisnak talált állítást a pontos tény (hivatkozásával) váltja fel, vagy kimarad, ha a szerző egyetért; véleményként soha nem marad.
 4. Az ellenőrizetlen marad, de jelölve: ha egy állítást nem sikerül ellenőrizni, maradjon benne, de a szerző véleményeként („szerintem…”, „úgy tudom…”). A jóslat a szerző jóslataként marad („attól tartok, hogy…”). A megfigyelés a szerző saját beszámolója marad („a videóban azt láttam, hogy…”, „az általam olvasott szakasz szerint…”).
