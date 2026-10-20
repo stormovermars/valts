@@ -20,7 +20,7 @@ Szótérkép: a vitatott dolgokhoz írd fel, melyik tábor milyen szót használ
 
 Állításnapló: állításonként egy sor: az állítás, a státusza (igaz / részben igaz / hamis / ellenőrizetlen / vélemény / jóslat), a forrása és az információ dátuma. Az ellenőrzés közben a „még nem találtam” ideiglenes köztes állapot; a „jóváhagyatlan” az egész naplót jelöli, nem egy sort. A beszélgetés során frissítsd. A végleges szöveg ebből épül, így semmi nem vész el, és semmi téves nem kerül vissza.
 
-Ha elérhetők artifactok, tedd közzé a `skills/valts/ledger.html` fájlt „Claim ledger” oldalként `capabilities: {"db": {}}` beállítással. Soronként egy állítás legyen a `claims` gyűjteményben (mezők: claim, status, side, source, date, created). A `side` a forrás oldalát jelöli: A tábor, B tábor, vegyes/hivatalos vagy egyoldalú. A „nem jóváhagyott” jelölés a `meta` gyűjtemény `ledger` dokumentumában van. Sorokat frissíts, ne írd újra az oldalt.
+Ha elérhetők artifactok, tedd közzé a `skills/valts/ledger.html` fájlt „Állításnapló” oldalként `capabilities: {"db": {}}` beállítással. Soronként egy állítás legyen a `claims` gyűjteményben (mezők: claim, status, override, side, source, date, created). A `side` a forrás oldalát jelöli: A tábor, B tábor, vegyes/hivatalos vagy egyoldalú. A `status` a te értékelésed; a szerző az oldalon az `override` mezővel felülbírálhatja. Az `override`-ot soha ne írd és ne töröld; a saját `status`-odat tartsd meg, kivéve ha az értékelésed változik, és a jelentésben említsd meg azokat a sorokat, ahol a szerző felülbírálata eltér az értékelésedtől. A `source`-ba egy vagy több URL kerüljön szóközzel elválasztva; az oldal link1, link2… néven mutatja őket. A „nem jóváhagyott” jelölés a `meta` gyűjtemény `ledger` dokumentumában van. Sorokat frissíts, ne írd újra az oldalt. Ezt alapértelmezetten, kérés nélkül tedd: az első ellenőrzés után azonnal tedd közzé, még a 4.1 jelentés előtt, a linkjét írd a jelentés tetejére, és az egész beszélgetés alatt ugyanazt az oldalt (URL-t) használd, hogy szerepeljen a munkamenet artifactjai között.
 
 ### 3. Ellenőrzés
 
@@ -96,11 +96,11 @@ Csak kérésre fut (pl. „írd át a másik oldalnak”), a kész átírásból
 11. Tisztességes módszer. A másik álláspontját pontosan adjuk vissza, szalmabáb és kiragadott adat nélkül.
 12. Egyszerű nyelv, őszinte bizonyíték. Kerüljük a töltött szavakat, és nem állítunk többet, mint amit a bizonyíték mutat.
 
-A 11. és 12. elv alapértelmezetten a saját szövegünkre is vonatkozik: az alábbi manipulációs technikák egyike sem szerepelhet abban, amit írunk. Ha egy vázlat megsérti őket, átírjuk, mielőtt felajánljuk. Küldés előtt a saját szövegünket is végignézzük a tizenkét elv szerint, főleg a 11. és 12. szerint.
+A 11. és 12. elv alapértelmezetten a saját szövegünkre is vonatkozik: az alábbi manipulációs technikák egyike sem szerepelhet abban, amit írunk, kivéve, ha törvényes, tiszteletben tartja az emberi méltóságot és az emberi jogokat, és senkinek nem árt, annak sem, akire irányul. Ha egy vázlat megsérti őket, átírjuk, mielőtt felajánljuk. Küldés előtt a saját szövegünket is végignézzük a tizenkét elv szerint, főleg a 11. és 12. szerint.
 
 ## Manipuláció felismerése
 
-Ha manipulációt látsz a szövegben, nevezd meg a technikát: ha a másik fél szövegében van, mondd: védekezzünk; ha a mienkben, írd át (lásd az elvek utáni bekezdést). A mintát jelöld, ne az embert, és jelezd, ha nem biztos a felismerés.
+Ha manipulációt látsz a szövegben, nevezd meg a technikát: ha a másik fél szövegében van, mondd: védekezzünk; ha a mienkben, írd át (lásd az elvek utáni bekezdést). A mintát jelöld, ne az embert, és jelezd, ha nem biztos a felismerés. Az a technika, amely törvényes, tiszteletben tartja az emberi méltóságot és az emberi jogokat, és senkinek nem árt, megnevezendő, de nem számít elvsértésnek; az emberi jogok sérelme mindig számít.
 
 - Elterelés: „te is ugyanezt csinálod”, hogy a kérdés elsikkadjon.
 - Áthárítás: a saját hibát a másiknak tulajdonítja.

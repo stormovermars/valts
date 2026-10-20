@@ -2,6 +2,14 @@
 
 A GitHub-repó egyetlen összevont commitot tartalmaz; a változások története itt van.
 
+## 1.5.0 – 2026-10-20 – napló alapértelmezetten, törvényes kivétel, paritás
+
+- Állításnapló oldal: alapértelmezetten, kérés nélkül közzétesszük, az első ellenőrzés után azonnal, a 4.1 jelentés előtt; a linkje a jelentés tetejére kerül; az egész beszélgetés alatt ugyanaz az oldal (URL) marad, hogy szerepeljen a munkamenet artifactjai között.
+- Manipulációs technikák: az a technika, amely törvényes, tiszteletben tartja az emberi méltóságot és az emberi jogokat, és senkinek nem árt (annak sem, akire irányul), szerepelhet a saját szövegünkben, jelzéskor megnevezzük, de nem számít elvsértésnek; az emberi jogok sérelme mindig számít.
+- A valts teljes paritásba hozva a switchcsel: ugyanazok a szabályok, számozás, naplóoldal (magyar felület, azonos adatmezők és gyűjtemények), tesztek és AGENTS.md; a naplóoldal címe „Állításnapló”, a SKILL.md így hivatkozik rá.
+- Állításnapló oldal: új `override` mező a szerző kézi státuszválasztásához (Claude `status`-át az oldal sosem írja felül; mindkettőt mutatja, a felülbírált sorokat jelöli, a számláló és a szűrők a tényleges státuszt használják); a `source` több URL-t is tartalmazhat, link1, link2… néven megjelenítve.
+- Verzió: 1.5.0 minden manifestben.
+
 ## 1.4.0 – 2026-10-18 – audit javítások
 
 - Státuszok: egy lista mindenhol (igaz / részben igaz / hamis / ellenőrizetlen / vélemény / jóslat); a „még nem találtam” ideiglenes köztes állapot, a „jóváhagyatlan” az egész naplót jelöli; a „nyitott” nem státusz; „nem ellenőrzött” → „ellenőrizetlen”.

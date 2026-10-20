@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="claude:viewport-fit-sides" content="cover">
-<title>Claim ledger</title>
+<title>Állításnapló</title>
 <style>
 /* Layout: summary counts, filters, the claim table, the unapproved flag, open items, then the add form. */
 :root {
@@ -35,7 +35,7 @@ button:disabled, input:disabled { opacity: .6; cursor: default; }
 button.on { border-color: var(--accent); color: var(--accent); }
 button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
-table { border-collapse: collapse; width: 100%; min-width: 680px; }
+table { border-collapse: collapse; width: 100%; min-width: 760px; }
 th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
 th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); font-weight: 600; }
 td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
@@ -50,16 +50,17 @@ td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
 .msg { color: var(--muted); font-size: 13px; min-height: 1.4em; }
 ul.open { padding-left: 18px; margin: 0; }
 ul.open li { margin-bottom: 4px; overflow-wrap: anywhere; }
+.tag { display: inline-block; margin-left: 6px; padding: 0 6px; border: 1px solid var(--warn); color: var(--warn); border-radius: 10px; font-size: 11px; vertical-align: middle; }
 .src a { color: var(--accent); overflow-wrap: anywhere; }
 [hidden] { display: none !important; }
 </style>
 
 <main>
-  <h1>Claim ledger</h1>
-  <p class="sub">Every claim, its status, the side of its source, and the source itself. Shared rows: anyone who can write here sees your changes.</p>
+  <h1>Állításnapló</h1>
+  <p class="sub">Minden állítás, a státusza, a forrás oldala és maga a forrás. Közös sorok: aki itt írhat, látja a módosításaidat.</p>
 
-  <div class="banner" id="banner" hidden>Unapproved: the author has not reviewed these claims yet.</div>
-  <label class="approve"><input type="checkbox" id="unapproved"> Ledger unapproved</label>
+  <div class="banner" id="banner" hidden>Jóváhagyatlan: a szerző még nem nézte át ezeket az állításokat.</div>
+  <label class="approve"><input type="checkbox" id="unapproved"> A napló jóváhagyatlan</label>
 
   <div class="counts" id="counts"></div>
 
@@ -67,47 +68,50 @@ ul.open li { margin-bottom: 4px; overflow-wrap: anywhere; }
 
   <div class="tablewrap">
     <table>
-      <thead><tr><th>Claim</th><th>Status</th><th>Side</th><th>Source</th><th>Date</th><th></th></tr></thead>
+      <thead><tr><th>Állítás</th><th>Claude</th><th>Státusz</th><th>Oldal</th><th>Forrás</th><th>Dátum</th><th></th></tr></thead>
       <tbody id="rows"></tbody>
     </table>
     <div class="empty" id="empty" hidden></div>
   </div>
 
-  <h2>Open items</h2>
-  <p class="sub" style="margin-top:0">Unverified claims. Copy into a reply or ask the author.</p>
+  <h2>Nyitott pontok</h2>
+  <p class="sub" style="margin-top:0">Ellenőrizetlen állítások. Másold be egy válaszba, vagy kérdezd meg a szerzőt.</p>
   <ul class="open" id="open"></ul>
-  <p class="empty" id="openEmpty" hidden style="text-align:left;padding:0">Nothing open.</p>
+  <p class="empty" id="openEmpty" hidden style="text-align:left;padding:0">Nincs nyitott pont.</p>
 
-  <h2>Add a claim</h2>
+  <h2>Állítás hozzáadása</h2>
   <form class="add" id="addForm">
-    <input name="claim" placeholder="Claim, as the text states it" required aria-label="Claim">
-    <select name="status" aria-label="Status">
-      <option value="unverified">unverified</option>
-      <option value="true">true</option>
-      <option value="partly_true">partly true</option>
-      <option value="false">false</option>
-      <option value="opinion">opinion</option>
-      <option value="prediction">prediction</option>
+    <input name="claim" placeholder="Az állítás, ahogy a szöveg mondja" required aria-label="Állítás">
+    <select name="status" aria-label="Státusz">
+      <option value="unverified">ellenőrizetlen</option>
+      <option value="true">igaz</option>
+      <option value="partly_true">részben igaz</option>
+      <option value="false">hamis</option>
+      <option value="opinion">vélemény</option>
+      <option value="prediction">jóslat</option>
     </select>
-    <select name="side" aria-label="Side of the source">
-      <option value="">side: none</option>
-      <option value="camp_a">camp A</option>
-      <option value="camp_b">camp B</option>
-      <option value="mixed">mixed/official</option>
-      <option value="one_sided">one-sided</option>
+    <select name="side" aria-label="A forrás oldala">
+      <option value="">oldal: nincs</option>
+      <option value="camp_a">A tábor</option>
+      <option value="camp_b">B tábor</option>
+      <option value="mixed">vegyes/hivatalos</option>
+      <option value="one_sided">egyoldalú</option>
     </select>
-    <input name="source" placeholder="Source URL or reference" aria-label="Source">
-    <input name="date" type="date" aria-label="Date of information">
-    <button type="submit">Add</button>
+    <input name="source" placeholder="Források URL-jei vagy hivatkozások, szóközzel elválasztva" aria-label="Forrás">
+    <input name="date" type="date" aria-label="Az információ dátuma">
+    <button type="submit">Hozzáad</button>
   </form>
   <div class="msg" id="msg" role="status"></div>
 </main>
 
 <script>
 const STATUSES = ["unverified", "true", "partly_true", "false", "opinion", "prediction"];
-const LABEL = { unverified: "unverified", true: "true", partly_true: "partly true", false: "false", opinion: "opinion", prediction: "prediction" };
-const SIDES = [["", "none"], ["camp_a", "camp A"], ["camp_b", "camp B"], ["mixed", "mixed/official"], ["one_sided", "one-sided"]];
+const LABEL = { unverified: "ellenőrizetlen", true: "igaz", partly_true: "részben igaz", false: "hamis", opinion: "vélemény", prediction: "jóslat" };
+const SIDES = [["", "nincs"], ["camp_a", "A tábor"], ["camp_b", "B tábor"], ["mixed", "vegyes/hivatalos"], ["one_sided", "egyoldalú"]];
 let rows = [];
+// `status` is Claude's evaluation and is never written for existing rows. `override` is the author's manual
+// choice. The db has no field-delete, so "no override" is the empty string; "" and absent both mean none.
+const eff = (r) => r.override || r.status;
 let filter = "all";
 let db = null;
 let unapproved = false;
@@ -126,46 +130,60 @@ const el = (tag, props = {}, kids = []) => {
 const say = (text) => { $("msg").textContent = text; };
 // Only http(s) links: rows are shared, so a source like "javascript:..." must stay plain text.
 const safeHref = (s) => (/^https?:\/\//i.test(s || "") ? s : null);
+// `source` holds one or more references split by whitespace, commas or newlines. Each URL becomes
+// link1, link2, ... (numbered within the row); other pieces stay plain text.
+function sourceNodes(source) {
+  const out = [];
+  let n = 0;
+  String(source || "").split(/[\s,]+/).filter(Boolean).forEach((p) => {
+    if (out.length) out.push(document.createTextNode(" "));
+    const href = safeHref(p);
+    if (href) { n++; out.push(el("a", { href, title: href, target: "_blank", rel: "noopener noreferrer", text: "link" + n })); }
+    else out.push(document.createTextNode(p));
+  });
+  return out;
+}
 
 function renderCounts() {
   const counts = Object.fromEntries(STATUSES.map((s) => [s, 0]));
-  rows.forEach((r) => { if (r.status in counts) counts[r.status]++; });
+  rows.forEach((r) => { if (eff(r) in counts) counts[eff(r)]++; });
   $("counts").replaceChildren(
-    el("div", { class: "count" }, [el("b", { text: String(rows.length) }), el("span", { text: "total" })]),
+    el("div", { class: "count" }, [el("b", { text: String(rows.length) }), el("span", { text: "összesen" })]),
     ...STATUSES.map((s) => el("div", { class: "count" }, [el("b", { text: String(counts[s]) }), el("span", { text: LABEL[s] })]))
   );
 }
 
 function renderFilters() {
   const make = (key, label) => el("button", { type: "button", class: filter === key ? "on" : "", "data-f": key, text: label });
-  $("filters").replaceChildren(make("all", "all"), ...STATUSES.map((s) => make(s, LABEL[s])));
+  $("filters").replaceChildren(make("all", "mind"), ...STATUSES.map((s) => make(s, LABEL[s])));
 }
 
 function renderRows() {
-  const shown = filter === "all" ? rows : rows.filter((r) => r.status === filter);
+  const shown = filter === "all" ? rows : rows.filter((r) => eff(r) === filter);
   $("empty").hidden = shown.length > 0;
-  $("empty").textContent = rows.length ? "No claims with this status." : "No claims yet. Add the first one below.";
+  $("empty").textContent = rows.length ? "Nincs ilyen státuszú állítás." : "Még nincs állítás. Add hozzá az elsőt lent.";
   $("rows").replaceChildren(...shown.map((r) => {
-    const sel = el("select", { "aria-label": "Status for " + (r.claim || r.id), disabled: db ? null : "" }, STATUSES.map((s) => {
-      const o = el("option", { value: s, text: LABEL[s] }); if (s === r.status) o.selected = true; return o;
-    }));
-    sel.addEventListener("change", () => setStatus(r.id, sel.value));
-    const side = el("select", { "aria-label": "Side for " + (r.claim || r.id), disabled: db ? null : "" }, SIDES.map(([k, v]) => {
+    const cur = eff(r), overridden = !!r.override && r.override !== r.status;
+    const opts = STATUSES.map((s) => {
+      const o = el("option", { value: s, text: LABEL[s] }); if (s === cur) o.selected = true; return o;
+    });
+    if (overridden) opts.push(el("option", { value: "__reset", text: "vissza Claude értékére" }));
+    const sel = el("select", { "aria-label": "Státusz: " + (r.claim || r.id), disabled: db ? null : "" }, opts);
+    sel.addEventListener("change", () => setStatus(r, sel.value));
+    const side = el("select", { "aria-label": "Oldal: " + (r.claim || r.id), disabled: db ? null : "" }, SIDES.map(([k, v]) => {
       const o = el("option", { value: k, text: v }); if (k === (r.side || "")) o.selected = true; return o;
     }));
     side.addEventListener("change", () => setField(r.id, { side: side.value }));
-    const del = el("button", { type: "button", text: armed.has(r.id) ? "Confirm delete" : "Delete", disabled: db ? null : "" });
+    const del = el("button", { type: "button", text: armed.has(r.id) ? "Törlés megerősítése" : "Törlés", disabled: db ? null : "" });
     del.addEventListener("click", () => {
       if (armed.has(r.id)) { removeRow(r.id); return; }
       armed.add(r.id); render();
     });
-    const href = safeHref(r.source);
-    const src = el("td", { class: "src" }, href
-      ? [el("a", { href, target: "_blank", rel: "noopener noreferrer", text: r.source })]
-      : [document.createTextNode(r.source || "")]);
+    const src = el("td", { class: "src" }, sourceNodes(r.source));
     return el("tr", {}, [
       el("td", { text: r.claim || "" }),
-      el("td", {}, [sel]),
+      el("td", { text: LABEL[r.status] || r.status || "" }),
+      el("td", {}, overridden ? [sel, el("span", { class: "tag", title: "Claude értékelésének kézi felülbírálata", text: "kézi" })] : [sel]),
       el("td", {}, [side]),
       src,
       el("td", { class: "num", text: r.date || "" }),
@@ -175,8 +193,8 @@ function renderRows() {
 }
 
 function renderOpen() {
-  const open = rows.filter((r) => r.status === "unverified");
-  $("open").replaceChildren(...open.map((r) => el("li", { text: (r.claim || "") + " (unverified)" })));
+  const open = rows.filter((r) => eff(r) === "unverified");
+  $("open").replaceChildren(...open.map((r) => el("li", { text: (r.claim || "") + " (ellenőrizetlen)" })));
   $("openEmpty").hidden = open.length > 0;
 }
 
@@ -190,22 +208,29 @@ function render() { renderCounts(); renderFilters(); renderRows(); renderOpen();
 
 // On failure, re-render from the last snapshot so the control shows the saved value again.
 async function setField(id, data) {
-  if (!db) return say("Read-only: you cannot change claims here.");
-  try { await db.collection("claims").doc(id).update(data); say("Saved."); }
-  catch (e) { render(); say(e.code === "invalid_argument" ? "Not allowed: your access is read-only." : "Could not save: " + (e.message || e.code)); }
+  if (!db) return say("Csak olvasható: itt nem módosíthatsz állításokat.");
+  try { await db.collection("claims").doc(id).update(data); say("Mentve."); }
+  catch (e) { render(); say(e.code === "invalid_argument" ? "Nem engedélyezett: a hozzáférésed csak olvasható." : "Nem sikerült menteni: " + (e.message || e.code)); }
 }
-const setStatus = (id, status) => setField(id, { status });
+// Writes only `override`, never `status`. Picking Claude's own value (or the reset option) clears it.
+function setStatus(r, value) {
+  if (value === "__reset" || value === r.status) {
+    if (r.override) return setField(r.id, { override: "" });
+    return render();
+  }
+  return setField(r.id, { override: value });
+}
 
 async function removeRow(id) {
   if (!db) return;
-  try { await db.collection("claims").doc(id).delete(); armed.delete(id); say("Deleted."); }
-  catch (e) { render(); say("Could not delete: " + (e.message || e.code)); }
+  try { await db.collection("claims").doc(id).delete(); armed.delete(id); say("Törölve."); }
+  catch (e) { render(); say("Nem sikerült törölni: " + (e.message || e.code)); }
 }
 
 async function setUnapproved(value) {
   if (!db) return;
-  try { await db.collection("meta").doc("ledger").set({ unapproved: value }); say(value ? "Marked unapproved." : "Marked approved."); }
-  catch (e) { render(); say("Could not save: " + (e.message || e.code)); }
+  try { await db.collection("meta").doc("ledger").set({ unapproved: value }); say(value ? "Jóváhagyatlannak jelölve." : "Jóváhagyottnak jelölve."); }
+  catch (e) { render(); say("Nem sikerült menteni: " + (e.message || e.code)); }
 }
 
 $("filters").addEventListener("click", (e) => {
@@ -220,28 +245,28 @@ $("addForm").addEventListener("submit", async (e) => {
   const f = new FormData(e.target);
   const claim = String(f.get("claim") || "").trim();
   if (!claim) return;
-  if (!db) return say("Read-only: you cannot add claims here.");
+  if (!db) return say("Csak olvasható: itt nem adhatsz hozzá állítást.");
   try {
     await db.collection("claims").add({
       claim, status: String(f.get("status")), side: String(f.get("side") || ""),
       source: String(f.get("source") || "").trim(), date: String(f.get("date") || ""),
       created: new Date().toISOString(),
     });
-    e.target.reset(); say("Added.");
-  } catch (err) { say(err.code === "quota_exceeded" ? "The ledger is full." : "Could not add: " + (err.message || err.code)); }
+    e.target.reset(); say("Hozzáadva.");
+  } catch (err) { say(err.code === "quota_exceeded" ? "A napló megtelt." : "Nem sikerült hozzáadni: " + (err.message || err.code)); }
 });
 
 (async () => {
   render();
   try { db = window.claude ? await window.claude.use("db") : null; } catch (e) { db = null; }
-  if (!db) { $("addForm").hidden = true; say("Read-only view. Open this page in Claude to edit."); render(); return; }
+  if (!db) { $("addForm").hidden = true; say("Csak olvasható nézet. A szerkesztéshez nyisd meg az oldalt Claude-ban."); render(); return; }
   db.collection("claims").orderBy("created", "desc").onSnapshot(
     (snap) => { rows = snap.docs.filter((d) => d.exists).map((d) => ({ id: d.id, ...d.data() })); render(); },
-    (err) => say("Live updates stopped: " + (err.message || err.code))
+    (err) => say("Az élő frissítés leállt: " + (err.message || err.code))
   );
   db.collection("meta").doc("ledger").onSnapshot(
     (snap) => { unapproved = snap.exists && snap.data()?.unapproved === true; renderUnapproved(); },
-    (err) => say("Live updates stopped: " + (err.message || err.code))
+    (err) => say("Az élő frissítés leállt: " + (err.message || err.code))
   );
 })();
 </script>
