@@ -1,6 +1,6 @@
 {
   "name": "valts",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Vitás témájú szövegek (kommentek, válaszok, cikkek, posztok, levelek, beszédek) írásakor vagy átnézésekor a tizenkét hangnem-elv alkalmazása, manipulációs technikák jelzése. Az állításokat mindkét oldal forrásaival ellenőrzi, szótérképet készít, és kérésre átírja a másik tábor számára. Parancs: /valts. Magyar nyelvű skill.",
   "author": {
     "name": "stormovermars"

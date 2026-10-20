@@ -2,6 +2,11 @@
 
 A GitHub-repó egyetlen összevont commitot tartalmaz; a változások története itt van.
 
+## 1.5.2 – 2026-10-20 – Claude száma / a te számod
+
+- Állításnapló: minden státuszcsempe Claude értékelése szerinti és a szerző felülírásaival számolt darabszámot is mutat, pl. „ellenőrizetlen 3/1”.
+- Verzió: 1.5.2 minden manifestben.
+
 ## 1.5.1 – 2026-10-20 – a napló sorai mellőzhetők, nem törlődnek
 
 - Állításnapló oldal: a sor Törlés gombja (és a megerősítő kattintás) helyett Mellőzés / Visszaállítás van, amely a logikai `ignored` mezőt állítja. A mellőzött sorok halványak, az állítás áthúzott, nem számítanak bele a státuszszámlálókba és a nyitott pontokba, külön „mellőzött” számlálócsempét és szűrőt kapnak (a „mind” mindent mutat). Az oldal soha nem töröl sort.
