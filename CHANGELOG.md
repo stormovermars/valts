@@ -2,6 +2,12 @@
 
 A GitHub-repó egyetlen összevont commitot tartalmaz; a változások története itt van.
 
+## 1.5.1 – 2026-10-20 – a napló sorai mellőzhetők, nem törlődnek
+
+- Állításnapló oldal: a sor Törlés gombja (és a megerősítő kattintás) helyett Mellőzés / Visszaállítás van, amely a logikai `ignored` mezőt állítja. A mellőzött sorok halványak, az állítás áthúzott, nem számítanak bele a státuszszámlálókba és a nyitott pontokba, külön „mellőzött” számlálócsempét és szűrőt kapnak (a „mind” mindent mutat). Az oldal soha nem töröl sort.
+- SKILL.md: az `ignored` bekerült a napló mezői közé; a mellőzött sorok kimaradnak a jelentésből és az átírásból, a jelölést Claude sosem törli, sorokat sosem töröl.
+- Verzió: 1.5.1 minden manifestben.
+
 ## 1.5.0 – 2026-10-20 – napló alapértelmezetten, törvényes kivétel, paritás
 
 - Állításnapló oldal: alapértelmezetten, kérés nélkül közzétesszük, az első ellenőrzés után azonnal, a 4.1 jelentés előtt; a linkje a jelentés tetejére kerül; az egész beszélgetés alatt ugyanaz az oldal (URL) marad, hogy szerepeljen a munkamenet artifactjai között.
