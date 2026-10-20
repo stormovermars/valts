@@ -2,6 +2,11 @@
 
 A GitHub-repó egyetlen összevont commitot tartalmaz; a változások története itt van.
 
+## 1.5.3 – 2026-10-20 – mobilos űrlapjavítás
+
+- Állításnapló: telefonszélességen a hozzáadó űrlap szövegmezői már nem lógnak túl a legördülő mezőkön.
+- Verzió: 1.5.3 minden manifestben.
+
 ## 1.5.2 – 2026-10-20 – Claude száma / a te számod
 
 - Állításnapló: minden státuszcsempe Claude értékelése szerinti és a szerző felülírásaival számolt darabszámot is mutat, pl. „ellenőrizetlen 3/1”.
